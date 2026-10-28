@@ -15,7 +15,7 @@ difference from stock that is not listed there.
 | `/opt` command, option store, build ID | – | `AltitudeConsoleCommandManager.createCommands` (entry) |
 | Faster image loading | `-Dclient.stockimages=true` turns it off | `ImagePack.readImageBytes`, `ImageManager.getPrecacheLoadImagesTask` (entry) |
 | Frame pacing | `framepacing` (off) | `GLFrame.sleep` (entry, may return early) |
-| Sharp HUD fonts | `stockfonts` (off, so fonts are sharp) | `Font.render(CharSequence,int,int,int,int)` (entry, may return early), `Font.reloadImage` (entry) |
+| Sharp HUD fonts | `sharpfonts` (on) | `Font.render(CharSequence,int,int,int,int)` (entry, may return early), `Font.reloadImage` (entry) |
 | Resizable window | `window` (resizable) | `GLFrame.setDisplayMode` (before return) |
 | Score HUD (ball mode) | `scorehud` (on) | `PlayerScene.onChatEvent` (entry), `PlayerScene.render` (before return) |
 | Perf HUD and log | `perfhud`, `perflog` (off); `/opt perf` | `PlayerScene.render` (before return) |

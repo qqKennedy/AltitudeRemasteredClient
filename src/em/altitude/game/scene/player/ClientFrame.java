@@ -11,7 +11,7 @@ public final class ClientFrame {
         ClientOptions.pollFile();
         FastImagePack.menuFrame(game);
         FramePacer.setEnabled(ClientOptions.on("framepacing"));
-        HudFontSharpen.setStock(ClientOptions.on("stockfonts"));
+        HudFontSharpen.setStock(!ClientOptions.on("sharpfonts"));
         WindowMode.poll(game);
         SpriteUpscale.frame(game);
         try {

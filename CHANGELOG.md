@@ -8,7 +8,7 @@ First public beta, for Altitude 1.1.9.
   powerups, projectiles, effects, map pieces) upscaled with waifu2x and corrected so they shrink back to the stock
   pixels exactly. Shipped as a 3x pack; the client uses stock, 2x or 3x depending on the window. Only the official
   pack is accepted.
-- **Sharp HUD text** (`stockfonts` off): Verdana, Arial, Courier New and Blambot Casual drawn at the screen's
+- **Sharp HUD text** (`sharpfonts`): Verdana, Arial, Courier New and Blambot Casual drawn at the screen's
   resolution with the stock layout.
 - **Resizable window** (`window resizable`).
 - **Ball-mode score HUD** (`scorehud`): a backing behind the score and the announced sudden-death target, with an

@@ -37,7 +37,7 @@ body:
       options:
         - Not tried
         - "Fixed by /opt hdsprites off"
-        - "Fixed by /opt stockfonts on"
+        - "Fixed by /opt sharpfonts off"
         - "Fixed by /opt window normal (then restart)"
         - "Fixed by /opt scorehud off"
         - "Fixed by /opt framepacing off"

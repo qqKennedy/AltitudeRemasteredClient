@@ -52,4 +52,4 @@ client build.
 ## Licence
 
 By contributing you agree that your contribution is licensed under the GPL-3.0, like the rest of this repository's
-code (see the Licence section of the README for what that does not cover).
+code (the game's own classes, art and fonts are not covered).

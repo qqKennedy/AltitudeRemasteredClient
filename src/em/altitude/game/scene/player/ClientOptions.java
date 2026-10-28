@@ -35,7 +35,7 @@ public final class ClientOptions {
     /** Every option, in the order /opt lists them. */
     static final List<Option> ALL = List.of(
             new Option("framepacing", OFF_ON, "Steadier frame times: a fixed deadline per frame (sleep, then a short spin) instead of the stock 1 ms sleep steps. Same frame-rate target; menus and play. Costs CPU: it spins for up to 2 ms of every frame, so at a high frame-rate cap (400 fps) about 30% more of one core."),
-            new Option("stockfonts", OFF_ON, "Use the stock low-resolution Verdana HUD fonts. OFF (default): text is drawn from a font rasterized at the HUD scale (2-4x), same layout and size, sharp on high-resolution displays."),
+            new Option("sharpfonts", ON_OFF, "HUD text drawn from fonts rasterized at the HUD scale (2-4x): same layout and size, sharp on high-resolution displays. OFF: the stock low-resolution bitmaps."),
             new Option("window", List.of("resizable", "normal"), "Windowed mode: resizable lets you drag the window to any size or maximise it. Applies the next time the window is created (restart or a display change)."),
             new Option("scorehud", ON_OFF, "Ball mode score: a faint backing behind the score so the team digits read on any background, and the sudden-death target once the server announces it (\"to 8\"). Display only."),
             new Option("perfhud", OFF_ON, "Two lines top right, updated each second: FPS, frame time (avg, p95, p99, max), frames longer than one refresh, GC pauses, game ticks per second, ping and heap. /opt perf prints the same line anywhere."),

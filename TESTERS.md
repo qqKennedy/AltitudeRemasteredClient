@@ -29,7 +29,7 @@ Steam's **Verify integrity of game files** (Altitude > Properties > Installed Fi
 
 Type `/opt` in the console. The first line is the build ID; please quote it in reports. Then each option:
 
-- **Sharp fonts**: HUD text drawn at your screen's resolution (`stockfonts` off).
+- **Sharp fonts**: HUD text drawn at your screen's resolution (`sharpfonts`).
 - **Score HUD**: a backing behind the ball-mode score and the sudden-death target (`scorehud`).
 - **Resizable window**: drag windowed mode to any size or maximise it (`window`).
 - **HD sprites**: upscaled art for the game world (`hdsprites`).

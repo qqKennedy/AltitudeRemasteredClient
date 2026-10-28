@@ -46,7 +46,7 @@ final class Hooks {
         FIXES.put("frame", "per-frame hook shared by the fixes (start of AltitudeGame.render)");
         FIXES.put("images", "faster image loading: APEG packs decoded off the render thread, game-wide packs precached in the menu");
         FIXES.put("pacing", "frame pacing: a fixed deadline per frame instead of the stock 1 ms sleep steps (/opt framepacing)");
-        FIXES.put("fonts", "sharp HUD fonts: text drawn from fonts rasterized at the HUD scale, stock metrics (/opt stockfonts)");
+        FIXES.put("fonts", "sharp HUD fonts: text drawn from fonts rasterized at the HUD scale, stock metrics (/opt sharpfonts)");
         FIXES.put("window", "resizable window: windowed mode can be dragged to any size or maximised (/opt window)");
         FIXES.put("score", "score HUD: backing behind the ball-mode score and the announced sudden-death target (/opt scorehud)");
         FIXES.put("perf", "perf HUD and log: per-second frame-time statistics, GC pauses, ticks, ping, heap (/opt perfhud, perflog, perf)");

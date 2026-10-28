@@ -50,7 +50,7 @@ import org.lwjgl.opengl.GLContext;
  * absorbs the stock builders' fixed offsets. The atlas is rasterized off the render thread (stock text until it is
  * ready), uploaded with mipmaps, and rebuilt when the HUD scale changes. Families not installed in Windows (Blambot
  * Casual) load from .ttf files bundled in the client jar. Strings with a character the face cannot draw keep the
- * stock bitmap. /opt stockfonts ON or -Dclient.sharpfonts=false keeps the stock bitmaps.
+ * stock bitmap. /opt sharpfonts off or -Dclient.sharpfonts=false keeps the stock bitmaps.
  */
 public final class HudFontSharpen {
     private HudFontSharpen(){}
@@ -83,7 +83,7 @@ public final class HudFontSharpen {
 
     private static Field field(String name){try{Field f=Font.class.getDeclaredField(name);f.setAccessible(true);return f;}catch(ReflectiveOperationException|RuntimeException e){return null;}}
 
-    /** Once per frame, from {@link ClientFrame}: /opt stockfonts. */
+    /** Once per frame, from {@link ClientFrame}: /opt sharpfonts off. */
     static void setStock(boolean on){stock=on;}
 
     /** Every stock bitmap the game's FontList builds, by bitmap name, for the families handled here. */

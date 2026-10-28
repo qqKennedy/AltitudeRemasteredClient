@@ -186,7 +186,7 @@ public final class SpriteUpscale {
         for (GameResourceManager rm : game.getActiveResourceManagers()) rm.getImageManager().freeTextures();
         DisplayListManager.invalidateActiveDisplayLists();
         for (GameResourceManager rm : game.getActiveResourceManagers()) rm.getImageManager().reloadImages();
-        // Font bitmaps are textures too: freed above, so reloaded as changeDisplayMode does (stockfonts draws them).
+        // Font bitmaps are textures too: freed above, so reloaded as changeDisplayMode does (sharpfonts off draws them).
         for (GameResourceManager rm : game.getActiveResourceManagers()) rm.getFontManager().reloadImages();
         LOG.info("SpriteUpscale: textures reloaded with hdsprites {} at {}x in {} ms", scale > 1 ? "on" : "off", scale, (System.nanoTime() - t0) / 1_000_000);
     }
