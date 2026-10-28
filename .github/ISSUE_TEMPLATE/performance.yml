@@ -1,0 +1,69 @@
+name: Performance report
+description: Stutter, low frame rate, hitches, or results from trying frame pacing.
+labels: [performance]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before playing, turn on the measurements: `/opt perfhud on` and `/opt perflog on`.
+        The log is written to `%LOCALAPPDATA%\NimblyGames\Altitude\config\client-perf.csv`.
+        Frame pacing results are welcome even if you noticed no difference.
+  - type: input
+    id: build
+    attributes:
+      label: Build ID
+      description: First line of `/opt`.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What you noticed
+      description: When it happens (joining a map, in fights, at a steady rate...), and how it feels.
+    validations:
+      required: true
+  - type: dropdown
+    id: pacing
+    attributes:
+      label: Frame pacing
+      description: Played with `/opt framepacing` off and on?
+      options:
+        - Didn't try it
+        - Felt smoother with it on
+        - No difference I could feel
+        - Felt worse with it on
+    validations:
+      required: true
+  - type: textarea
+    id: hud
+    attributes:
+      label: Perf HUD lines
+      description: The two lines at the top right, typed out or as a screenshot. One with frame pacing off and one with it on, if you tried both.
+    validations:
+      required: false
+  - type: input
+    id: cap
+    attributes:
+      label: Frame-rate cap and screen refresh rate
+      description: For example "400 fps cap, 144 Hz screen, vsync off".
+    validations:
+      required: true
+  - type: input
+    id: gpu
+    attributes:
+      label: Graphics card and CPU, laptop or desktop
+    validations:
+      required: true
+  - type: input
+    id: screen
+    attributes:
+      label: Window or screen size, fullscreen or windowed
+    validations:
+      required: true
+  - type: textarea
+    id: csv
+    attributes:
+      label: client-perf.csv
+      description: Drag the file in (zip it if GitHub refuses the type).
+    validations:
+      required: false

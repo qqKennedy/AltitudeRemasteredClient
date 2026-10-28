@@ -1,0 +1,75 @@
+name: Bug report
+description: Something looks wrong, crashes or doesn't work.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. The build ID is the first line of `/opt` in the game console.
+        Logs are in `%LOCALAPPDATA%\NimblyGames\Altitude\logs` (paste that into Explorer's address bar).
+  - type: input
+    id: build
+    attributes:
+      label: Build ID
+      description: First line of `/opt`, for example `f8a1d2b-20261027`.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead. Screenshots help a lot.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to make it happen
+      description: Map, game mode, online or offline, and what you did just before.
+    validations:
+      required: false
+  - type: dropdown
+    id: options
+    attributes:
+      label: Does turning an option off change it?
+      description: Try the one closest to the problem and tell us what happened.
+      multiple: true
+      options:
+        - Not tried
+        - "Fixed by /opt hdsprites off"
+        - "Fixed by /opt stockfonts on"
+        - "Fixed by /opt window normal (then restart)"
+        - "Fixed by /opt scorehud off"
+        - "Fixed by /opt framepacing off"
+        - Still happens with all of these
+    validations:
+      required: true
+  - type: input
+    id: gpu
+    attributes:
+      label: Graphics card
+      description: For example "NVIDIA RTX 3060", "AMD RX 6700 XT", "Intel UHD 620 (laptop)".
+    validations:
+      required: true
+  - type: input
+    id: screen
+    attributes:
+      label: Window or screen size, and fullscreen or windowed
+      description: For example "2560x1440 fullscreen" or "1920x1080 window, maximised".
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Windows version, CPU and RAM
+      description: Optional, but useful for crashes and performance.
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Drag in `altitudeError.log` (and any other recent file) from the logs folder, or paste the relevant lines.
+      render: text
+    validations:
+      required: false

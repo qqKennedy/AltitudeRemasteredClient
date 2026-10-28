@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: How to install, undo and test
+    url: https://github.com/qqKennedy/AltitudeRemasteredClient/blob/main/TESTERS.md
+    about: Install steps, what each option does, and what to include in a report.
