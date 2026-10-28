@@ -16,7 +16,10 @@ difference from stock that is not listed there.
 | Faster image loading | `-Dclient.stockimages=true` turns it off | `ImagePack.readImageBytes`, `ImageManager.getPrecacheLoadImagesTask` (entry) |
 | Frame pacing | `framepacing` (off) | `GLFrame.sleep` (entry, may return early) |
 | Sharp HUD fonts | `sharpfonts` (on) | `Font.render(CharSequence,int,int,int,int)` (entry, may return early), `Font.reloadImage` (entry) |
-| Resizable window | `window` (resizable) | `GLFrame.setDisplayMode` (before return) |
+| Resizable or borderless window | `window` (resizable), `monitor` (1) | `GLFrame.setDisplayMode` (entry, before return) |
+| Frame-rate target | `fps` (auto) | `GLFrame.setDisplayMode` (before return) |
+| Screenshots off the render thread | – | `SceneManager.takeScreenshot` (entry, may return early) |
+| Brightness in the game image | `gamma` (image) | `GLFrame.setDisplayConfiguration` (entry, may return early), `AltitudeGame.render` (before return) |
 | Score HUD (ball mode) | `scorehud` (on) | `PlayerScene.onChatEvent` (entry), `PlayerScene.render` (before return) |
 | Perf HUD and log | `perfhud`, `perflog` (off); `/opt perf` | `PlayerScene.render` (before return) |
 | HD sprites | `hdsprites` (on) | `ImagePack.loadTextureFromRgba` (entry, may return early) |

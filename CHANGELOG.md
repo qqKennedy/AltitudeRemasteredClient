@@ -1,5 +1,13 @@
 # Changelog
 
+## Next
+
+- Frame rate follows the monitor's refresh rate, also in a window (stock: 60 fps) (`fps`).
+- Screenshots no longer freeze the game.
+- Borderless window on a chosen monitor (`window borderless`, `monitor`).
+- Brightness slider works in a window (`gamma`).
+- `stockfonts` is now `sharpfonts` (on).
+
 ## v1.0.0-beta
 
 First public beta, for Altitude 1.1.9.

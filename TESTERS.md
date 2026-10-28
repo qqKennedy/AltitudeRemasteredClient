@@ -53,6 +53,11 @@ difference was too small to see. It may matter more on other setups:
 Especially interesting: a frame-rate cap close to your refresh rate (for example 120 or 144 fps), and slower PCs. At a
 very high cap (999 fps) it keeps a CPU core busy all the time, so leave it off there.
 
+## Also worth trying
+
+- `/opt window borderless` and `/opt monitor 2` (restart after): does it fill your second monitor?
+- On a 144 Hz or faster screen in a window: does `/opt perfhud on` show your refresh rate as FPS?
+
 ## Reporting
 
 For performance, first turn on:

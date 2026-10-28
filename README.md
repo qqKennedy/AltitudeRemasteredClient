@@ -1,6 +1,6 @@
 # Altitude REMASTERED
 
-HD sprites, sharp text and a resizable window for [Altitude](https://store.steampowered.com/app/41300/Altitude/) 1.1.9.
+HD sprites, sharp text, smoother windowed play and freeze-free screenshots for [Altitude](https://store.steampowered.com/app/41300/Altitude/) 1.1.9.
 No gameplay changes; works on all servers.
 
 ![Stock (left) and HD (right)](docs/images/hd-sprites-planes.jpg)
@@ -17,8 +17,10 @@ Type `/opt` in the game console. All on by default:
 |---|---|
 | `hdsprites` | HD sprites |
 | `sharpfonts` | Sharp HUD text |
-| `window` | Resizable window |
+| `window` | Resizable window (or `borderless`, with `monitor`) |
 | `scorehud` | Clearer ball-mode score |
+| `fps` | Frame rate follows your monitor |
+| `gamma` | Brightness slider works in a window |
 
 Off by default: `framepacing` (steadier frames, more CPU), `perfhud` (frame-time overlay).
 
