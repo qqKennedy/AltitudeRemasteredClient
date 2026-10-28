@@ -15,6 +15,7 @@ public final class ClientFrame {
         HudFontSharpen.setStock(!ClientOptions.on("sharpfonts"));
         WindowMode.poll(game);
         SpriteUpscale.frame(game);
+        Screenshots.frame(game);
         try {
             PerfMonitor.frame(game);
         } catch (RuntimeException | LinkageError e) {

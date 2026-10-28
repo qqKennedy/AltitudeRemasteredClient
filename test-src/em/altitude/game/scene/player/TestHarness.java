@@ -152,6 +152,9 @@ public final class TestHarness {
                         scene.onChatEvent(-1, false, line.trim().substring(5).trim()); // as the server sends it: player id -1
                     }
                     else if (w[0].equals("clock") && w.length > 1) setClock(game, Float.parseFloat(w[1]));
+                    else if (w[0].equals("screenshots")) compareScreenshots(game);
+                    else if (w[0].equals("screenshot")) takeScreenshot(game, w.length > 1 && w[1].equals("stock"));
+                    else if (w[0].equals("dialog")) logScreenshotDialog(game);
                     else if (w[0].equals("quit")) { LOG.info("TestHarness: quit"); System.exit(0); }
                     LOG.info("TestHarness: command {}", line.trim());
                 }
@@ -170,6 +173,55 @@ public final class TestHarness {
         Field f = em.altitude.game.GameMode.class.getDeclaredField("roundDelay");
         f.setAccessible(true);
         f.set(game.getGameMode(), new em.common.math.regulator.Delay(em.altitude.game.Const.sec(seconds)));
+    }
+
+    /**
+     * The game's own screenshot (SceneManager.takeScreenshot), first through the stock method, then through the client's,
+     * in the same frame, so both files should have the same pixels. The stock file is renamed to "... stock.png", and
+     * the time each call blocks the render thread is logged.
+     */
+    private static void compareScreenshots(AltitudeGame game) throws ReflectiveOperationException {
+        java.lang.reflect.Method take = em.altitude.game.scene.SceneManager.class.getDeclaredMethod("takeScreenshot");
+        take.setAccessible(true);
+        File dir = new File(game.getDirectoryManager().getDataDirectory(), "screenshots");
+        long t0 = System.nanoTime();
+        Screenshots.stock = true;
+        try {
+            take.invoke(game.getSceneManager());
+        } finally {
+            Screenshots.stock = false;
+        }
+        long t1 = System.nanoTime();
+        File[] pngs = dir.listFiles((d, n) -> n.endsWith(".png") && !n.endsWith(" stock.png"));
+        if (pngs != null && pngs.length > 0) {
+            java.util.Arrays.sort(pngs, java.util.Comparator.comparingLong(File::lastModified));
+            File newest = pngs[pngs.length - 1];
+            newest.renameTo(new File(dir, newest.getName().replace(".png", " stock.png")));
+        }
+        long t2 = System.nanoTime();
+        take.invoke(game.getSceneManager());
+        long t3 = System.nanoTime();
+        LOG.info("TestHarness: screenshots: stock {} ms, client {} ms on the render thread ({})", (t1 - t0) / 1_000_000, (t3 - t2) / 1_000_000, dir);
+    }
+
+    /** One game screenshot, through the stock method or the client's. */
+    private static void takeScreenshot(AltitudeGame game, boolean stock) throws ReflectiveOperationException {
+        java.lang.reflect.Method take = em.altitude.game.scene.SceneManager.class.getDeclaredMethod("takeScreenshot");
+        take.setAccessible(true);
+        Screenshots.stock = stock;
+        try {
+            take.invoke(game.getSceneManager());
+        } finally {
+            Screenshots.stock = false;
+        }
+    }
+
+    /** Logs the stock screenshot dialog's state (the window SceneManager shows after a screenshot). */
+    private static void logScreenshotDialog(AltitudeGame game) throws ReflectiveOperationException {
+        Field f = em.altitude.game.scene.SceneManager.class.getDeclaredField("screenshotDialogWindow");
+        f.setAccessible(true);
+        em.altitude.game.ui.Window window = (em.altitude.game.ui.Window) f.get(game.getSceneManager());
+        LOG.info("TestHarness: screenshot dialog {}", window == null ? "none" : (window.isVisible() ? "visible" : "hidden") + " " + window.getWidth() + "x" + window.getHeight());
     }
 
     /** Hook: end of AltitudeGame.render (before the buffers are swapped). */
