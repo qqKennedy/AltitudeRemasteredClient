@@ -22,8 +22,14 @@ Type `/opt` in the game console. All on by default:
 | `fps` | Frame rate follows your monitor |
 | `gamma` | Brightness slider works in a window |
 
-Off by default: `framepacing` (steadier frames, more CPU), `perfhud` (frame-time overlay), `cursorlock play` (keep
-the cursor in the game window while flying).
+Off by default:
+
+| Option | What it does |
+|---|---|
+| `framepacing on` | Steadier frames (uses more CPU) |
+| `cursorlock play` | Keeps the cursor in the game window while flying |
+| `perfhud on` | Frame-time overlay |
+| `perflog on` | Saves frame times to `client-perf.csv` |
 
 ## Problems
 
