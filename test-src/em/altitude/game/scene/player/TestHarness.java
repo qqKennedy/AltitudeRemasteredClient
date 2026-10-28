@@ -155,6 +155,7 @@ public final class TestHarness {
                     else if (w[0].equals("screenshots")) compareScreenshots(game);
                     else if (w[0].equals("screenshot")) takeScreenshot(game, w.length > 1 && w[1].equals("stock"));
                     else if (w[0].equals("dialog")) logScreenshotDialog(game);
+                    else if (w[0].equals("gamma") && w.length > 1) game.getFrame().setDisplayConfiguration(Float.parseFloat(w[1])); // the brightness slider
                     else if (w[0].equals("quit")) { LOG.info("TestHarness: quit"); System.exit(0); }
                     LOG.info("TestHarness: command {}", line.trim());
                 }
@@ -228,7 +229,10 @@ public final class TestHarness {
     public static void endFrame(AltitudeGame game) {
         if (DIR == null) return;
         try {
-            if (!gallery.equals("off")) drawGallery(game);
+            if (!gallery.equals("off")) {
+                drawGallery(game);
+                Gamma.endFrame(); // the gallery covers the frame after the game's own gamma pass: give it the same pass
+            }
             if (shotName != null) {
                 String name = shotName;
                 shotName = null;

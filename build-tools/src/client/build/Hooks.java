@@ -52,6 +52,7 @@ final class Hooks {
         FIXES.put("perf", "perf HUD and log: per-second frame-time statistics, GC pauses, ticks, ping, heap (/opt perfhud, perflog, perf)");
         FIXES.put("fps", "frame-rate target follows the monitor's refresh rate, also windowed (stock: 60 fps in a window, at most 180) (/opt fps)");
         FIXES.put("shots", "screenshots without the freeze: the screen is read on the render thread, the PNG written on a worker (stock file, console line and dialog)");
+        FIXES.put("gamma", "brightness slider applied to the game image, in a window too, instead of the monitor's gamma ramp in fullscreen only (/opt gamma)");
         FIXES.put("hdsprites","HD sprites (/opt hdsprites, on by default): world textures replaced by upscaled art from Altitude-1.1.9-hdsprites.zip next to the client jar");
     }
 
@@ -83,6 +84,10 @@ final class Hooks {
                     At.BEFORE_RETURN, 1, Mode.CALL, CLIENT + "ScoreGuide", "render", List.of("this", "arg1")),
             new Hook("perf", Jar.GAME, "em/altitude/game/scene/player/PlayerScene", "render(F)V",
                     At.BEFORE_RETURN, 1, Mode.CALL, CLIENT + "PerfMonitor", "render", List.of("this")),
+            new Hook("gamma", Jar.WRAPPERS, "em/opengl/ui/GLFrame", "setDisplayConfiguration(F)V",
+                    At.ENTRY, 1, Mode.RETURN_IF_TRUE, CLIENT + "Gamma", "set", List.of("arg1")),
+            new Hook("gamma", Jar.GAME, "em/altitude/game/AltitudeGame", "render()V",
+                    At.BEFORE_RETURN, 1, Mode.CALL, CLIENT + "Gamma", "endFrame", List.of()),
             new Hook("shots", Jar.GAME, "em/altitude/game/scene/SceneManager", "takeScreenshot()V",
                     At.ENTRY, 1, Mode.RETURN_IF_TRUE, CLIENT + "Screenshots", "take", List.of("this")),
             new Hook("hdsprites", Jar.WRAPPERS, "em/opengl/resource/image/ImagePack",
@@ -105,6 +110,7 @@ final class Hooks {
         CLASSES.put("PerfMonitor", "perf");
         CLASSES.put("FrameTarget", "fps");
         CLASSES.put("Screenshots", "shots");
+        CLASSES.put("Gamma", "gamma");
         CLASSES.put("SpriteUpscale", "hdsprites");
         CLASSES.put("SpritePack", "hdsprites");
     }
