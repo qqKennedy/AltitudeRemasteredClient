@@ -9,6 +9,9 @@ No gameplay changes; works on all servers.
 
 Download the latest release from [Releases](../../releases) and follow the one line there.
 
+Setup also updates the game's Java runtime from 17 to 21 (shorter garbage-collection pauses) and its audio library to
+OpenAL Soft 1.25.2. You can untick either one, and **Uninstall** puts the originals back.
+
 ## Options
 
 Type `/opt` in the game console. All on by default:
