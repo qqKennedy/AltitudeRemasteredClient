@@ -39,7 +39,7 @@ param(
     [string[]]$JavaArgs = @(),  # extra JVM arguments, e.g. -Dclient.x=y
     [string]$Pack,             # an HD sprite pack to install next to the test client's jar (replaces -Sprites)
     [switch]$StartOn,          # launch with hdsprites already on (the start-up path), shot "start-on" first
-    [ValidateSet('normal', 'resizable')][string]$Window = 'normal',  # /opt window at launch (applies when the window is created)
+    [ValidateSet('normal', 'resizable', 'borderless')][string]$Window = 'normal',  # /opt window at launch (applies when the window is created)
     [int]$Perf = 0,            # seconds per framepacing setting: pacing measurement and score shots instead of sprite shots
     [switch]$TimerRes,         # let the client keep its 1 ms timer while its window is covered (see below)
     [switch]$Reuse,

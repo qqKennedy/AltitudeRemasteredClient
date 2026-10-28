@@ -47,7 +47,7 @@ final class Hooks {
         FIXES.put("images", "faster image loading: APEG packs decoded off the render thread, game-wide packs precached in the menu");
         FIXES.put("pacing", "frame pacing: a fixed deadline per frame instead of the stock 1 ms sleep steps (/opt framepacing)");
         FIXES.put("fonts", "sharp HUD fonts: text drawn from fonts rasterized at the HUD scale, stock metrics (/opt sharpfonts)");
-        FIXES.put("window", "resizable window: windowed mode can be dragged to any size or maximised (/opt window)");
+        FIXES.put("window", "resizable (drag to any size or maximise) or borderless on a chosen monitor (/opt window, /opt monitor)");
         FIXES.put("score", "score HUD: backing behind the ball-mode score and the announced sudden-death target (/opt scorehud)");
         FIXES.put("perf", "perf HUD and log: per-second frame-time statistics, GC pauses, ticks, ping, heap (/opt perfhud, perflog, perf)");
         FIXES.put("fps", "frame-rate target follows the monitor's refresh rate, also windowed (stock: 60 fps in a window, at most 180) (/opt fps)");
@@ -72,7 +72,9 @@ final class Hooks {
             new Hook("fonts", Jar.WRAPPERS, "em/opengl/resource/font/Font", "reloadImage()V",
                     At.ENTRY, 1, Mode.CALL, CLIENT + "HudFontSharpen", "reload", List.of("this")),
             new Hook("window", Jar.WRAPPERS, "em/opengl/ui/GLFrame", "setDisplayMode(Lorg/lwjgl/opengl/DisplayMode;Lorg/lwjgl/opengl/PixelFormat;ZZ)V",
-                    At.BEFORE_RETURN, 1, Mode.CALL, CLIENT + "WindowMode", "afterCreate", List.of("arg3")),
+                    At.BEFORE_RETURN, 1, Mode.CALL, CLIENT + "WindowMode", "afterCreate", List.of("this", "arg3")),
+            new Hook("window", Jar.WRAPPERS, "em/opengl/ui/GLFrame", "setDisplayMode(Lorg/lwjgl/opengl/DisplayMode;Lorg/lwjgl/opengl/PixelFormat;ZZ)V",
+                    At.ENTRY, 1, Mode.CALL, CLIENT + "WindowMode", "beforeCreate", List.of("arg3")),
             new Hook("fps", Jar.WRAPPERS, "em/opengl/ui/GLFrame", "setDisplayMode(Lorg/lwjgl/opengl/DisplayMode;Lorg/lwjgl/opengl/PixelFormat;ZZ)V",
                     At.BEFORE_RETURN, 1, Mode.CALL, CLIENT + "FrameTarget", "afterCreate", List.of("this", "arg3")),
             new Hook("score", Jar.GAME, "em/altitude/game/scene/player/PlayerScene", "onChatEvent(IZLjava/lang/String;)V",
