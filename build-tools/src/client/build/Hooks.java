@@ -54,6 +54,7 @@ final class Hooks {
         FIXES.put("shots", "screenshots without the freeze: the screen is read on the render thread, the PNG written on a worker (stock file, console line and dialog)");
         FIXES.put("gamma", "brightness slider applied to the game image, in a window too, instead of the monitor's gamma ramp in fullscreen only (/opt gamma)");
         FIXES.put("hdsprites","HD sprites (/opt hdsprites, on by default): world textures replaced by upscaled art from Altitude-1.1.9-hdsprites.zip next to the client jar");
+        FIXES.put("cursorlock", "cursor kept inside the game window while flying, released in menus, console, chat, when dead or unfocused (/opt cursorlock)");
     }
 
     static final List<Hook> HOOKS = new java.util.ArrayList<>(List.of(
@@ -92,7 +93,11 @@ final class Hooks {
                     At.ENTRY, 1, Mode.RETURN_IF_TRUE, CLIENT + "Screenshots", "take", List.of("this")),
             new Hook("hdsprites", Jar.WRAPPERS, "em/opengl/resource/image/ImagePack",
                     "loadTextureFromRgba(Lem/opengl/resource/image/ImageDescriptor$InternalFormat;IILjava/nio/ByteBuffer;)V",
-                    At.ENTRY, 1, Mode.RETURN_IF_TRUE, CLIENT + "SpriteUpscale", "upload", List.of("arg1", "arg2", "arg3", "arg4"))));
+                    At.ENTRY, 1, Mode.RETURN_IF_TRUE, CLIENT + "SpriteUpscale", "upload", List.of("arg1", "arg2", "arg3", "arg4")),
+            new Hook("cursorlock", Jar.GAME, "em/altitude/game/AltitudeGame", "onFocusChanged(Z)V",
+                    At.ENTRY, 1, Mode.CALL, CLIENT + "CursorLock", "focus", List.of("arg1")),
+            new Hook("cursorlock", Jar.GAME, "em/altitude/game/AltitudeGame", "shutdown()V",
+                    At.ENTRY, 1, Mode.CALL, CLIENT + "CursorLock", "shutdown", List.of())));
 
     /** Client classes by simple name (nested classes belong to their outer class), and their fix. */
     static final Map<String, String> CLASSES = new LinkedHashMap<>();
@@ -113,6 +118,7 @@ final class Hooks {
         CLASSES.put("Gamma", "gamma");
         CLASSES.put("SpriteUpscale", "hdsprites");
         CLASSES.put("SpritePack", "hdsprites");
+        CLASSES.put("CursorLock", "cursorlock");
     }
 
     /**

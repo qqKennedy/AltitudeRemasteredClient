@@ -16,6 +16,7 @@ public final class ClientFrame {
         WindowMode.poll(game);
         SpriteUpscale.frame(game);
         Screenshots.frame(game);
+        CursorLock.frame(game);
         try {
             PerfMonitor.frame(game);
         } catch (RuntimeException | LinkageError e) {

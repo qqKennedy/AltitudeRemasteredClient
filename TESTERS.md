@@ -57,6 +57,9 @@ very high cap (999 fps) it keeps a CPU core busy all the time, so leave it off t
 
 - `/opt window borderless` and `/opt monitor 2` (restart after): does it fill your second monitor?
 - On a 144 Hz or faster screen in a window: does `/opt perfhud on` show your refresh rate as FPS?
+- `/opt cursorlock play` (two monitors especially): while flying the cursor can't leave the game window. It should be
+  free again in the menu (Esc), console, chat, while dead, and after alt-tab or the Win key; check the Steam overlay
+  (Shift+Tab) still works. If the cursor ever stays stuck after a crash, press Win+L (or Ctrl+Alt+Del) to free it.
 
 ## Reporting
 

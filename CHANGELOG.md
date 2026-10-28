@@ -7,6 +7,8 @@
 - Borderless window on a chosen monitor (`window borderless`, `monitor`).
 - Brightness slider works in a window (`gamma`).
 - `stockfonts` is now `sharpfonts` (on).
+- Cursor kept in the game window while flying, released in menus, console, chat, when dead or alt-tabbed
+  (`cursorlock play`, off by default).
 
 ## v1.0.0-beta
 

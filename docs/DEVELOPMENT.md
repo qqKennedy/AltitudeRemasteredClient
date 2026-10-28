@@ -23,6 +23,7 @@ difference from stock that is not listed there.
 | Score HUD (ball mode) | `scorehud` (on) | `PlayerScene.onChatEvent` (entry), `PlayerScene.render` (before return) |
 | Perf HUD and log | `perfhud`, `perflog` (off); `/opt perf` | `PlayerScene.render` (before return) |
 | HD sprites | `hdsprites` (on) | `ImagePack.loadTextureFromRgba` (entry, may return early) |
+| Cursor kept in the window while flying | `cursorlock` (off) | `AltitudeGame.onFocusChanged`, `AltitudeGame.shutdown` (entry) |
 | Shared per-frame hook | – | `AltitudeGame.render` (entry) |
 
 `GLFrame`, `Font`, `ImagePack` and `ImageManager` come from `EmWrappers-1.1.9.jar`. Their patched copies go into the
