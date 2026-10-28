@@ -7,6 +7,7 @@
 - Borderless window on a chosen monitor (`window borderless`, `monitor`).
 - Brightness slider works in a window (`gamma`).
 - `stockfonts` is now `sharpfonts` (on).
+- One-file installer, `Altitude-REMASTERED-Setup.exe`: optional Java 21 runtime and updated audio library (OpenAL Soft 1.25.2), exact uninstall, repair after Steam's file check.
 - Cursor kept in the game window while flying, released in menus, console, chat, when dead or alt-tabbed
   (`cursorlock play`, off by default).
 
@@ -27,4 +28,4 @@ First public beta, for Altitude 1.1.9.
 - **Frame pacing** (`framepacing`, off, please test): steadier frame times for some CPU.
 - **Perf overlay and log** (`perfhud`, `perflog`): per-second frame-time statistics, GC pauses, ticks, ping and heap.
 - `/opt` console command for all of the above, with the build ID on its first line.
-- Installer script with backup and uninstall (`remastered.ps1` in the bundle).
+- Installer script with backup and uninstall.

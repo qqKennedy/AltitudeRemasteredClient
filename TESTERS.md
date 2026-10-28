@@ -1,80 +1,33 @@
-# Altitude REMASTERED: playtest notes
-
-A patched Altitude 1.1.9 client: HD sprites, sharp HUD text, a resizable window and a clearer ball-mode score.
+# Testing Altitude REMASTERED
 
 ## Install
 
-1. Close Altitude.
-2. Unzip the bundle anywhere (right-click > Extract All).
-3. In the extracted folder, right-click empty space, choose **Open in Terminal**, and run:
+Close Altitude, run `Altitude-REMASTERED-Setup.exe`, press **Install**. To remove it, run it again and press
+**Uninstall**.
 
-   ```
-   powershell -ExecutionPolicy Bypass -File .\remastered.ps1
-   ```
+Windows may say "Windows protected your PC": click **More info**, then **Run anyway** (the exe isn't code-signed).
 
-   It finds Altitude through Steam. If it can't, add `-GameDir "D:\SteamLibrary\steamapps\common\Altitude"` (your path).
-4. Start Altitude from Steam as usual.
+## What to try
 
-## Undo
+Type `/opt` in the game console: the first line is the build ID, then every option. Please try:
 
-Close Altitude and run:
+- **Frame pacing** (`/opt framepacing on`, off by default): does it feel smoother? Tell us your frame-rate cap and
+  screen refresh rate.
+- **Borderless window** (`/opt window borderless`, `/opt monitor 2`, then restart): does it fill your second monitor?
+- **Cursor lock** (`/opt cursorlock play`): the cursor stays in the game while flying, and is free in menus, chat and
+  after alt-tab. If it ever stays stuck, Win+L frees it.
 
-```
-powershell -ExecutionPolicy Bypass -File .\remastered.ps1 -Uninstall
-```
+## If something's wrong
 
-Steam's **Verify integrity of game files** (Altitude > Properties > Installed Files) also undoes the install.
+| Problem | Try |
+|---|---|
+| Sprites look wrong, or stutter | `/opt hdsprites off` |
+| Text looks wrong | `/opt sharpfonts off` |
+| The game won't start, or crashes | run Setup, untick **Java 21**, Install |
+| Sound crackles or stops (for example after plugging in a headset) | run Setup, untick **audio library**, Install |
 
-## What's new
+Then [report it](https://github.com/qqKennedy/AltitudeRemasteredClient/issues/new/choose) with the build ID and your
+graphics card. For performance, turn on `/opt perfhud on` and `/opt perflog on` first, and attach
+`%LOCALAPPDATA%\NimblyGames\Altitude\config\client-perf.csv`.
 
-Type `/opt` in the console. The first line is the build ID; please quote it in reports. Then each option:
-
-- **Sharp fonts**: HUD text drawn at your screen's resolution (`sharpfonts`).
-- **Score HUD**: a backing behind the ball-mode score and the sudden-death target (`scorehud`).
-- **Resizable window**: drag windowed mode to any size or maximise it (`window`).
-- **HD sprites**: upscaled art for the game world (`hdsprites`).
-
-All of these are on by default. `/opt NAME` explains one; `/opt NAME on` or `off` changes it.
-
-If sprites look wrong or the game stutters, try `/opt hdsprites off` and tell us whether that fixed it.
-
-## Please test: frame pacing (off by default)
-
-`/opt framepacing on` replaces the game's frame limiter with one that keeps every frame on a fixed schedule. With a
-400 fps cap on a 120 Hz screen, frame times were about 4x steadier but it used about 30% more of one CPU core, and the
-difference was too small to see. It may matter more on other setups:
-
-1. Turn on `/opt perfhud on`, play a few minutes with `/opt framepacing off`, then a few minutes with it `on`.
-2. Tell us whether it **felt** any different (smoother, less stutter, or nothing), and copy the perf HUD's two lines
-   from each.
-3. Tell us your **frame-rate cap** (graphics options), your **screen's refresh rate** (60, 120, 144, 240 Hz...), and
-   your **CPU**, laptop or desktop.
-
-Especially interesting: a frame-rate cap close to your refresh rate (for example 120 or 144 fps), and slower PCs. At a
-very high cap (999 fps) it keeps a CPU core busy all the time, so leave it off there.
-
-## Also worth trying
-
-- `/opt window borderless` and `/opt monitor 2` (restart after): does it fill your second monitor?
-- On a 144 Hz or faster screen in a window: does `/opt perfhud on` show your refresh rate as FPS?
-- `/opt cursorlock play` (two monitors especially): while flying the cursor can't leave the game window. It should be
-  free again in the menu (Esc), console, chat, while dead, and after alt-tab or the Win key; check the Steam overlay
-  (Shift+Tab) still works. If the cursor ever stays stuck after a crash, press Win+L (or Ctrl+Alt+Del) to free it.
-
-## Reporting
-
-For performance, first turn on:
-
-```
-/opt perfhud on
-/opt perflog on
-```
-
-Then play a few minutes and send us:
-
-- what you saw, and the build ID from `/opt`;
-- your graphics card (and screen resolution);
-- the logs in `%LOCALAPPDATA%\NimblyGames\Altitude\logs`;
-- `%LOCALAPPDATA%\NimblyGames\Altitude\config\client-perf.csv` (from `perflog`).
-
-Paste `%LOCALAPPDATA%\NimblyGames\Altitude` into the Explorer address bar to open the folder.
+Steam's "Verify integrity of game files" can leave a half-removed install: run Setup again to repair it.

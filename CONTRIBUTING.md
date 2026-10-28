@@ -27,7 +27,7 @@ your install and never writes to it).
 .\build.ps1 -TestJar   # also the offline test jar
 .\test\visual.ps1 -Pack out\Altitude-1.1.9-hdsprites.zip   # unattended in-game screenshots, HD sprites off and on
 .\test\visual.ps1 -Perf 60                                 # frame pacing measurement (see the script's help)
-.\bundle.ps1           # the playtest zip, named after the build ID
+.\installer\build-setup.ps1   # out\Altitude-REMASTERED-Setup.exe, with the jar and pack inside
 ```
 
 The tests in `test\` run on every build; each `*Test` class has a `main` that throws on failure. The visual test

@@ -57,7 +57,7 @@ $libs = (Get-ChildItem "$stock\lib\*.jar" | Where-Object { $_.Name -ne 'Altitude
 Compile $asm "$out\tools" @("$root\build-tools\src")
 Compile "$gameJar;$libs" "$out\classes" @("$root\src")
 # Build ID: short commit, -dirty when the work tree has changes, and the date, e.g. 29c6bc0-20261027. The client logs
-# it at start-up and /opt prints it first (ClientOptions.BUILD_ID); bundle.ps1 names the playtest zip after it.
+# it at start-up and /opt prints it first (ClientOptions.BUILD_ID).
 $commit = git -C $root rev-parse --short HEAD
 if ($LASTEXITCODE -ne 0 -or -not $commit) { throw 'git rev-parse failed: the build ID needs the git checkout' }
 $dirty = if (git -C $root status --porcelain) { '-dirty' } else { '' }

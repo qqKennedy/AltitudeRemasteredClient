@@ -40,7 +40,7 @@ are in `tools/`. The scripts find Altitude in your Steam libraries; otherwise pa
 ```powershell
 .\build.ps1             # out\Altitude-1.1.9-REMASTERED.jar
 .\build.ps1 -TestJar    # also the offline test jar
-.\bundle.ps1            # the release bundle, named after the build ID
+.\installer\build-setup.ps1   # out\Altitude-REMASTERED-Setup.exe, with the jar and pack inside
 ```
 
 The build:
@@ -130,11 +130,12 @@ It renames the old runtime to `runtime-before-java21-<time>`, backs up `app\Alti
 ## Layout
 
 ```
-build.ps1, bundle.ps1        build, test, patch, verify, diff; release bundle
+build.ps1                    build, test, patch, verify, diff
 build-tools/                 Hooks (the patch surface), Patcher, LoadCheck, JarDiff
 src/                         client classes
 test/, test-src/             tests run by the build, visual test; test-jar-only classes
 sprite-tools/, art/          HD sprite pipeline and art
-install/                     installer and Java 21 runtime script
+installer/                   Setup.exe source (C#) and its build script
+install/                     Java 21 runtime script (for developers)
 tools/                       ecj 3.38.0, ASM 9.7.1, game-dir.ps1
 ```
