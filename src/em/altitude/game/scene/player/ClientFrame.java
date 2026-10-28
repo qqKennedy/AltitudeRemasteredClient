@@ -10,6 +10,7 @@ public final class ClientFrame {
     public static void frame(AltitudeGame game) {
         ClientOptions.pollFile();
         FastImagePack.menuFrame(game);
+        FrameTarget.frame(game);
         FramePacer.setEnabled(ClientOptions.on("framepacing"));
         HudFontSharpen.setStock(!ClientOptions.on("sharpfonts"));
         WindowMode.poll(game);

@@ -50,7 +50,8 @@ final class Hooks {
         FIXES.put("window", "resizable window: windowed mode can be dragged to any size or maximised (/opt window)");
         FIXES.put("score", "score HUD: backing behind the ball-mode score and the announced sudden-death target (/opt scorehud)");
         FIXES.put("perf", "perf HUD and log: per-second frame-time statistics, GC pauses, ticks, ping, heap (/opt perfhud, perflog, perf)");
-        FIXES.put("hdsprites", "HD sprites (/opt hdsprites, on by default): world textures replaced by upscaled art from Altitude-1.1.9-hdsprites.zip next to the client jar");
+        FIXES.put("fps", "frame-rate target follows the monitor's refresh rate, also windowed (stock: 60 fps in a window, at most 180) (/opt fps)");
+        FIXES.put("hdsprites","HD sprites (/opt hdsprites, on by default): world textures replaced by upscaled art from Altitude-1.1.9-hdsprites.zip next to the client jar");
     }
 
     static final List<Hook> HOOKS = new java.util.ArrayList<>(List.of(
@@ -71,6 +72,8 @@ final class Hooks {
                     At.ENTRY, 1, Mode.CALL, CLIENT + "HudFontSharpen", "reload", List.of("this")),
             new Hook("window", Jar.WRAPPERS, "em/opengl/ui/GLFrame", "setDisplayMode(Lorg/lwjgl/opengl/DisplayMode;Lorg/lwjgl/opengl/PixelFormat;ZZ)V",
                     At.BEFORE_RETURN, 1, Mode.CALL, CLIENT + "WindowMode", "afterCreate", List.of("arg3")),
+            new Hook("fps", Jar.WRAPPERS, "em/opengl/ui/GLFrame", "setDisplayMode(Lorg/lwjgl/opengl/DisplayMode;Lorg/lwjgl/opengl/PixelFormat;ZZ)V",
+                    At.BEFORE_RETURN, 1, Mode.CALL, CLIENT + "FrameTarget", "afterCreate", List.of("this", "arg3")),
             new Hook("score", Jar.GAME, "em/altitude/game/scene/player/PlayerScene", "onChatEvent(IZLjava/lang/String;)V",
                     At.ENTRY, 1, Mode.CALL, CLIENT + "ScoreGuide", "onChat", List.of("arg1", "arg2", "arg3")),
             new Hook("score", Jar.GAME, "em/altitude/game/scene/player/PlayerScene", "render(F)V",
@@ -95,6 +98,7 @@ final class Hooks {
         CLASSES.put("HudDraw", "score");
         CLASSES.put("PerfStats", "perf");
         CLASSES.put("PerfMonitor", "perf");
+        CLASSES.put("FrameTarget", "fps");
         CLASSES.put("SpriteUpscale", "hdsprites");
         CLASSES.put("SpritePack", "hdsprites");
     }

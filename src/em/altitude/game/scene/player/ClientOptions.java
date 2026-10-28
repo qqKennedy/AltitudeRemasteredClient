@@ -34,6 +34,7 @@ public final class ClientOptions {
 
     /** Every option, in the order /opt lists them. */
     static final List<Option> ALL = List.of(
+            new Option("fps", List.of("auto", "stock"), "Frame-rate target. auto (default): your monitor's refresh rate, also in a window, where stock uses 60 fps (and stock caps fullscreen at 180). stock: the stock target. A frame-rate override in options.xml still wins."),
             new Option("framepacing", OFF_ON, "Steadier frame times: a fixed deadline per frame (sleep, then a short spin) instead of the stock 1 ms sleep steps. Same frame-rate target; menus and play. Costs CPU: it spins for up to 2 ms of every frame, so at a high frame-rate cap (400 fps) about 30% more of one core."),
             new Option("sharpfonts", ON_OFF, "HUD text drawn from fonts rasterized at the HUD scale (2-4x): same layout and size, sharp on high-resolution displays. OFF: the stock low-resolution bitmaps."),
             new Option("window", List.of("resizable", "normal"), "Windowed mode: resizable lets you drag the window to any size or maximise it. Applies the next time the window is created (restart or a display change)."),
